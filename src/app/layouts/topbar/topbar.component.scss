@@ -12,7 +12,8 @@
   z-index: 1000;
 }
 
-.theme-toggle, .register-btn {
+.theme-toggle,
+.register-btn {
   border: none;
   padding: 8px 12px;
   cursor: pointer;
@@ -24,12 +25,44 @@
   color: #fff;
 }
 
-//TODO: Move to global styles?!
 .light-btn {
   background-color: #f1f1f1;
   color: #333;
 }
 
-.icon-location, .icon-person, .icon-theme {
+.icon-location,
+.icon-person,
+.icon-theme {
   font-size: 2rem;
+}
+
+.location-wrapper {
+  position: relative;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.city-dropdown {
+  position: absolute;
+  top: 40px;   
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  z-index: 9999;
+}
+
+.city-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.city-item:hover {
+  background-color: #f1f1f1;
 }
