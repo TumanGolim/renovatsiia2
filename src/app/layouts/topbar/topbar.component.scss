@@ -1,0 +1,35 @@
+:host {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.theme-toggle, .register-btn {
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.dark-btn {
+  background-color: #333;
+  color: #fff;
+}
+
+//TODO: Move to global styles?!
+.light-btn {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.icon-location, .icon-person, .icon-theme {
+  font-size: 2rem;
+}

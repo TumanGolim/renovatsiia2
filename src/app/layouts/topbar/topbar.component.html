@@ -1,0 +1,23 @@
+<button
+  (click)="toggleTheme()"
+  class="theme-toggle"
+  [ngClass]="{ 'dark-btn': isDarkMode, 'light-btn': !isDarkMode }"
+>
+  <span class="material-symbols-filled icon-theme">
+    {{ isDarkMode ? "nightlight" : "sunny" }}
+  </span>
+</button>
+
+<div>
+  <span class="material-symbols-filled icon-location"> location_on </span>
+</div>
+
+<button
+  class="register-btn"
+  [ngClass]="{ 'dark-btn': isDarkMode, 'light-btn': !isDarkMode }"
+>
+  <span class="material-symbols-filled icon-person">
+    person
+  </span>
+   Увійти
+</button>
