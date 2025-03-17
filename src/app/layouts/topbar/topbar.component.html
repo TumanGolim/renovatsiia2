@@ -8,16 +8,21 @@
   </span>
 </button>
 
-<div>
-  <span class="material-symbols-filled icon-location"> location_on </span>
+<div class="location-wrapper">
+  <span class="material-symbols-filled icon-location">location_on</span>
+  <ng-select
+    [items]="cities"
+    [(ngModel)]="selectedCity"
+    [clearable]="false"
+    placeholder="Оберіть область"
+    class="region-select"
+  ></ng-select>
 </div>
 
 <button
   class="register-btn"
   [ngClass]="{ 'dark-btn': isDarkMode, 'light-btn': !isDarkMode }"
 >
-  <span class="material-symbols-filled icon-person">
-    person
-  </span>
-   Увійти
+  <span class="material-symbols-filled icon-person"> person </span>
+  Увійти
 </button>

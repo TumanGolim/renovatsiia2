@@ -4,10 +4,10 @@ import { LayoutComponent } from './layouts/layout.component';
 export const routes: Routes = [
   {
     path: '',
-    component: LayoutComponent, 
+    component: LayoutComponent,
     children: [
       {
-        path: '',
+        path: 'home',
         loadChildren: () =>
           import('./apps/main/main.routes').then((m) => m.MAIN_ROUTES),
       },
@@ -15,7 +15,6 @@ export const routes: Routes = [
         path: 'admin',
         loadChildren: () =>
           import('./apps/admin/admin.routes').then((m) => m.ADMIN_ROUTES),
-        canActivate: [],
       },
     ],
   },

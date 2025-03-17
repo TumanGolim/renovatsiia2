@@ -1,4 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@import "@ng-select/ng-select/themes/material.theme.css"; // або інша тема
+
+.ng-select.custom .ng-select-container {
+  border-color: #ccc;
+  border-radius: 4px;
+}
 html,
 body {
   height: 100%;

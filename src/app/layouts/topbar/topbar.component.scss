@@ -12,7 +12,8 @@
   z-index: 1000;
 }
 
-.theme-toggle, .register-btn {
+.theme-toggle,
+.register-btn {
   border: none;
   padding: 8px 12px;
   cursor: pointer;
@@ -24,12 +25,24 @@
   color: #fff;
 }
 
-//TODO: Move to global styles?!
 .light-btn {
   background-color: #f1f1f1;
   color: #333;
 }
 
-.icon-location, .icon-person, .icon-theme {
+.icon-location,
+.icon-person,
+.icon-theme {
   font-size: 2rem;
+}
+
+.location-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 300px;
+}
+
+.region-select {
+  width: 100%;
 }
