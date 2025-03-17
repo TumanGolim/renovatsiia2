@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-topbar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgSelectModule, FormsModule],
   templateUrl: './topbar.component.html',
   styleUrls: ['./topbar.component.scss'],
 })
@@ -38,19 +40,9 @@ export class TopbarComponent {
     'Автономна Республіка Крим',
   ];
   selectedCity = this.cities[0];
-  isCityDropdownOpen = false;
 
   toggleTheme(): void {
     this.isDarkMode = !this.isDarkMode;
     document.body.classList.toggle('dark-theme', this.isDarkMode);
-  }
-
-  toggleCityDropdown(): void {
-    this.isCityDropdownOpen = !this.isCityDropdownOpen;
-  }
-
-  selectCity(city: string): void {
-    this.selectedCity = city;
-    this.isCityDropdownOpen = false;
   }
 }

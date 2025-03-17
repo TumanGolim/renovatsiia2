@@ -9,20 +9,14 @@
 </button>
 
 <div class="location-wrapper">
-  <div class="location" (click)="toggleCityDropdown()">
-    <span class="material-symbols-filled icon-location">location_on</span>
-    <span>{{ selectedCity }}</span>
-  </div>
-
-  <div class="city-dropdown" *ngIf="isCityDropdownOpen">
-    <div
-      *ngFor="let city of cities"
-      class="city-item"
-      (click)="selectCity(city)"
-    >
-      {{ city }}
-    </div>
-  </div>
+  <span class="material-symbols-filled icon-location">location_on</span>
+  <ng-select
+    [items]="cities"
+    [(ngModel)]="selectedCity"
+    [clearable]="false"
+    placeholder="Оберіть область"
+    class="region-select"
+  ></ng-select>
 </div>
 
 <button

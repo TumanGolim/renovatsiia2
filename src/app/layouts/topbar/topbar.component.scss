@@ -37,32 +37,12 @@
 }
 
 .location-wrapper {
-  position: relative;
-}
-
-.location {
   display: flex;
   align-items: center;
-  gap: 5px;
-  cursor: pointer;
+  gap: 10px;
+  width: 300px;
 }
 
-.city-dropdown {
-  position: absolute;
-  top: 40px;   
-  left: 0;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-  z-index: 9999;
-}
-
-.city-item {
-  padding: 8px 12px;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.city-item:hover {
-  background-color: #f1f1f1;
+.region-select {
+  width: 100%;
 }
