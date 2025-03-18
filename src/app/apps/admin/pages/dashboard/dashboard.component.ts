@@ -35,7 +35,6 @@ export class DashboardComponent implements OnInit {
   workPhotos: WorkPhoto[] = [];
   nextPhotoId = 1;
 
-  // Категорії українською мовою
   categories: WorkCategory[] = [
     {
       name: 'Стіни',
@@ -109,7 +108,7 @@ export class DashboardComponent implements OnInit {
           [Validators.required, Validators.pattern(/^\+?[0-9]{10,12}$/)],
         ],
         experience: [0, [Validators.required, Validators.min(0)]],
-        description: ['', [Validators.required, Validators.minLength(50)]],
+        description: ['', [Validators.required, Validators.minLength(50)]], //можливо якщо це буде потрібнго зробити більше 50 символів то зміним це по потребі
       }),
       skills: this.fb.array([]),
     });
