@@ -1,3 +1,37 @@
 <div class="container">
-  <h1>Home</h1>
+  <h1>Ремонтные работы</h1>
+
+  <div class="categories-container">
+    <div class="category-buttons">
+      <button
+        *ngFor="let category of categories"
+        class="category-btn"
+        [class.active]="selectedCategory === category.name"
+        (click)="selectCategory(category.name)"
+      >
+        {{ category.name }}
+      </button>
+    </div>
+
+    <div class="subtypes-container" *ngIf="selectedCategory">
+      <div class="subtypes-list">
+        <h2>{{ selectedCategory }}</h2>
+        <div class="subtypes">
+          <div
+            *ngFor="let category of categories"
+            class="subtype-items"
+            [class.visible]="selectedCategory === category.name"
+          >
+            <button
+              *ngFor="let subtype of category.subtypes"
+              class="subtype-btn"
+              (click)="selectSubtype(category.name, subtype)"
+            >
+              {{ subtype }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

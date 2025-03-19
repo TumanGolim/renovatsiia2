@@ -1,0 +1,248 @@
+<div class="profile-container">
+  <h1>Профіль майстра</h1>
+
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <!-- Особиста інформація -->
+    <div class="form-section">
+      <h2>Особиста інформація</h2>
+
+      <div formGroupName="personalInfo" class="personal-info-grid">
+        <div class="form-group">
+          <label for="firstName">Ім'я*</label>
+          <input type="text" id="firstName" formControlName="firstName" />
+          <div
+            class="error-message"
+            *ngIf="
+              profileForm.get('personalInfo')?.get('firstName')?.invalid &&
+              (profileForm.get('personalInfo')?.get('firstName')?.touched ||
+                profileForm.get('personalInfo')?.get('firstName')?.dirty)
+            "
+          >
+            Ім'я обов'язкове для заповнення
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Прізвище*</label>
+          <input type="text" id="lastName" formControlName="lastName" />
+          <div
+            class="error-message"
+            *ngIf="
+              profileForm.get('personalInfo')?.get('lastName')?.invalid &&
+              (profileForm.get('personalInfo')?.get('lastName')?.touched ||
+                profileForm.get('personalInfo')?.get('lastName')?.dirty)
+            "
+          >
+            Прізвище обов'язкове для заповнення
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Телефон*</label>
+          <input
+            type="tel"
+            id="phone"
+            formControlName="phone"
+            placeholder="+380123456789"
+          />
+          <div
+            class="error-message"
+            *ngIf="
+              profileForm.get('personalInfo')?.get('phone')?.invalid &&
+              (profileForm.get('personalInfo')?.get('phone')?.touched ||
+                profileForm.get('personalInfo')?.get('phone')?.dirty)
+            "
+          >
+            Введіть коректний номер телефону
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="experience">Досвід роботи (років)*</label>
+          <input
+            type="number"
+            id="experience"
+            formControlName="experience"
+            min="0"
+          />
+          <div
+            class="error-message"
+            *ngIf="
+              profileForm.get('personalInfo')?.get('experience')?.invalid &&
+              (profileForm.get('personalInfo')?.get('experience')?.touched ||
+                profileForm.get('personalInfo')?.get('experience')?.dirty)
+            "
+          >
+            Вкажіть коректний досвід роботи
+          </div>
+        </div>
+
+        <div class="form-group photo-group">
+          <label for="photo">Фотографія профілю</label>
+          <div class="photo-upload">
+            <input
+              type="file"
+              id="photo"
+              accept="image/*"
+              (change)="onProfilePhotoSelected($event)"
+              class="file-input"
+            />
+            <label for="photo" class="file-label">
+              <span class="icon-upload">📷</span> Вибрати фото
+            </label>
+            <div class="preview" *ngIf="selectedPhoto">
+              <img [src]="selectedPhoto" alt="Фото профілю" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group description-group">
+          <label for="description">Про себе*</label>
+          <textarea
+            id="description"
+            formControlName="description"
+            rows="4"
+            placeholder="Розкажіть про свій досвід, кваліфікацію та особливості роботи"
+          ></textarea>
+          <div
+            class="error-message"
+            *ngIf="
+              profileForm.get('personalInfo')?.get('description')?.invalid &&
+              (profileForm.get('personalInfo')?.get('description')?.touched ||
+                profileForm.get('personalInfo')?.get('description')?.dirty)
+            "
+          >
+            Опишіть себе (мінімум 50 символів)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Послуги та навички -->
+    <div class="form-section">
+      <h2>Мої послуги та навички</h2>
+
+      <div class="skills-selection">
+        <div class="category-selector">
+          <h3>Виберіть категорії робіт</h3>
+          <div class="categories-grid">
+            <button
+              type="button"
+              *ngFor="let category of categories"
+              class="category-btn"
+              [class.active]="selectedCategory === category.name"
+              (click)="selectCategory(category.name)"
+            >
+              {{ category.name }}
+            </button>
+          </div>
+
+          <div class="subtypes-container" *ngIf="selectedCategory">
+            <h4>{{ selectedCategory }}</h4>
+            <div class="subtypes-grid">
+              <div
+                *ngFor="let category of categories"
+                class="subtype-items"
+                [class.visible]="selectedCategory === category.name"
+              >
+                <button
+                  type="button"
+                  *ngFor="let subtype of category.subtypes"
+                  class="subtype-btn"
+                  (click)="addSkill(category.name, subtype)"
+                >
+                  {{ subtype }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="selected-skills">
+          <h3>Вибрані навички та ціни</h3>
+          <div class="skills-list" formArrayName="skills">
+            <div *ngIf="skillsArray.length === 0" class="no-skills">
+              Ви ще не вибрали жодної навички
+            </div>
+
+            <div
+              *ngFor="let skill of skillsArray.controls; let i = index"
+              [formGroupName]="i"
+              class="skill-item"
+            >
+              <div class="skill-info">
+                <span class="skill-category">{{
+                  skill.get("category")?.value
+                }}</span>
+                <span class="skill-subtype">{{
+                  skill.get("subtype")?.value
+                }}</span>
+              </div>
+
+              <div class="skill-price">
+                <label>Ціна (₴/год):</label>
+                <input type="number" formControlName="price" min="0" />
+              </div>
+
+              <button
+                type="button"
+                class="remove-skill"
+                (click)="removeSkill(i)"
+                title="Видалити навичку"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Фотографії робіт -->
+    <div class="form-section">
+      <h2>Мої роботи</h2>
+      <div class="work-photos-section">
+        <div class="work-photos-upload">
+          <input
+            type="file"
+            id="workPhotos"
+            accept="image/*"
+            multiple
+            (change)="onWorkPhotoSelected($event)"
+            class="file-input"
+          />
+          <label for="workPhotos" class="file-label">
+            <span class="icon-plus">+</span> Додати фото робіт
+          </label>
+        </div>
+
+        <div class="work-photos-gallery" *ngIf="workPhotos.length > 0">
+          <div class="work-photo-item" *ngFor="let photo of workPhotos">
+            <div class="photo-container">
+              <img [src]="photo.src" alt="Фото роботи" />
+              <button
+                type="button"
+                class="remove-photo"
+                (click)="removeWorkPhoto(photo.id)"
+                title="Видалити фото"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="no-photos-message" *ngIf="workPhotos.length === 0">
+          У вас ще немає фотографій виконаних робіт. Додайте фото, щоб підвищити
+          довіру клієнтів.
+        </div>
+      </div>
+    </div>
+
+    <!-- Кнопки дій -->
+    <div class="form-actions">
+      <button type="submit" class="save-btn">Зберегти профіль</button>
+      <button type="button" class="cancel-btn">Скасувати зміни</button>
+    </div>
+  </form>
+</div>

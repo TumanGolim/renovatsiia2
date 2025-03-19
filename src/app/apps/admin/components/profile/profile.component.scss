@@ -1,0 +1,438 @@
+// Основний контейнер
+.profile-container {
+  max-width: 1200px;
+  margin: 80px auto 50px;
+  padding: 20px;
+
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 28px;
+  }
+}
+
+// Секції форми
+.form-section {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  margin-bottom: 30px;
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #444;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    font-size: 22px;
+  }
+}
+
+// Особиста інформація з grid-layout
+.personal-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+
+  .description-group {
+    grid-column: 1 / -1; // На всю ширину
+  }
+
+  .photo-group {
+    grid-row: span 2; // Зайняти 2 рядки
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+
+    .photo-group {
+      grid-row: auto;
+    }
+  }
+}
+
+// Стилі для груп форми
+.form-group {
+  margin-bottom: 20px;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+
+    &:focus {
+      border-color: #4a90e2;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+}
+
+// Повідомлення про помилку
+.error-message {
+  color: #e74c3c;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+// Завантаження фото
+.photo-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .file-input {
+    display: none;
+  }
+
+  .file-label {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #4a90e2;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: normal;
+    transition: background-color 0.2s;
+
+    .icon-upload {
+      margin-right: 8px;
+    }
+
+    &:hover {
+      background-color: darken(#4a90e2, 10%);
+    }
+  }
+
+  .preview {
+    margin-top: 15px;
+    width: 100%;
+    max-width: 200px;
+
+    img {
+      width: 100%;
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+// Секція навичок
+.skills-selection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.category-selector,
+.selected-skills {
+  h3,
+  h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #444;
+  }
+}
+
+// Сітка категорій
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.category-btn {
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f5f5f5;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: #e9e9e9;
+  }
+
+  &.active {
+    background-color: #4a90e2;
+    color: white;
+  }
+}
+
+// Контейнер підкатегорій
+.subtypes-container {
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.subtypes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.subtype-items {
+  display: none;
+
+  &.visible {
+    display: contents;
+  }
+}
+
+.subtype-btn {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: #f0f7ff;
+    border-color: #4a90e2;
+    color: #4a90e2;
+  }
+}
+
+// Вибрані навички
+.selected-skills {
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  padding: 15px;
+}
+
+.no-skills {
+  padding: 20px;
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}
+
+.skill-item {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 4px;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  .skill-info {
+    flex: 1;
+
+    .skill-category {
+      display: block;
+      font-weight: 500;
+      color: #444;
+    }
+
+    .skill-subtype {
+      display: block;
+      color: #666;
+      font-size: 14px;
+    }
+  }
+
+  .skill-price {
+    display: flex;
+    align-items: center;
+    margin: 0 15px;
+
+    label {
+      margin-right: 8px;
+      margin-bottom: 0;
+    }
+
+    input {
+      width: 100px;
+      padding: 8px;
+    }
+  }
+
+  .remove-skill {
+    padding: 8px;
+    border: none;
+    background: none;
+    color: #e74c3c;
+    cursor: pointer;
+    font-size: 18px;
+
+    &:hover {
+      color: darken(#e74c3c, 10%);
+    }
+  }
+}
+
+// Секція фотографій робіт
+.work-photos-section {
+  margin-top: 15px;
+}
+
+.work-photos-upload {
+  margin-bottom: 20px;
+
+  .file-label {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #4a90e2;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: normal;
+    transition: background-color 0.2s;
+
+    .icon-plus {
+      margin-right: 8px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    &:hover {
+      background-color: darken(#4a90e2, 10%);
+    }
+  }
+}
+
+.work-photos-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.work-photo-item {
+  position: relative;
+
+  .photo-container {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    aspect-ratio: 4/3;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .remove-photo {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: rgba(231, 76, 60, 0.8);
+      }
+    }
+  }
+}
+
+.no-photos-message {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+// Кнопки дій
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+
+  button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .save-btn {
+    background-color: #27ae60;
+    color: white;
+
+    &:hover {
+      background-color: darken(#27ae60, 10%);
+    }
+  }
+
+  .cancel-btn {
+    background-color: #f1f1f1;
+    color: #333;
+
+    &:hover {
+      background-color: darken(#f1f1f1, 10%);
+    }
+  }
+}
+
+// Адаптивні стилі для мобільних
+@media (max-width: 768px) {
+  .skill-item {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .skill-info {
+      margin-bottom: 10px;
+    }
+
+    .skill-price {
+      margin: 0 0 10px 0;
+    }
+
+    .remove-skill {
+      align-self: flex-end;
+    }
+  }
+
+  .form-actions {
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+}
