@@ -1,37 +1,40 @@
-<div class="container">
+<div class="container mt-5">
   <h1>Ремонтные работы</h1>
 
   <div class="categories-container">
-    <div class="category-buttons">
-      <button
-        *ngFor="let category of categories"
-        class="category-btn"
-        [class.active]="selectedCategory === category.name"
-        (click)="selectCategory(category.name)"
-      >
-        {{ category.name }}
-      </button>
-    </div>
-
-    <div class="subtypes-container" *ngIf="selectedCategory">
-      <div class="subtypes-list">
-        <h2>{{ selectedCategory }}</h2>
-        <div class="subtypes">
-          <div
-            *ngFor="let category of categories"
-            class="subtype-items"
-            [class.visible]="selectedCategory === category.name"
-          >
-            <button
-              *ngFor="let subtype of category.subtypes"
-              class="subtype-btn"
-              (click)="selectSubtype(category.name, subtype)"
-            >
-              {{ subtype }}
-            </button>
+    <div class="category-row d-flex flex-wrap gap-2">
+      @for(category of serviceCategories; track category.category_id){
+        <div class="category">
+          <button class="btn btn-primary" (click)="toggleSubcategories(category)">
+            {{ category.category_name }}
+          </button>
+          <div class="subcategories" *ngIf="category === selectedCategory">
+            @for(subcategory of category.subcategories; track subcategory.subcategory_id){
+              <button class="btn btn-secondary" (click)="selectSubcategory(subcategory)">
+                {{ subcategory.subcategory_name }}
+              </button>
+            }
           </div>
         </div>
-      </div>
+      }
+    </div>
+  </div>
+
+  <div *ngIf="selectedCategory">
+    <h2>Вибрана категорія: {{ selectedCategory.category_name }}</h2>
+    <div *ngIf="selectedSubcategory">
+      <h3>Вибрана підкатегорія: {{ selectedSubcategory.subcategory_name }}</h3>
+    </div>
+    <div *ngIf="masters.length > 0">
+      <h3>Майстри:</h3>
+      <ul>
+        @for(master of masters; track master.id){
+          <li>{{ master.firstName }} {{ master.lastName }} - {{ master.phone }}</li>
+        }
+      </ul>
+    </div>
+    <div *ngIf="masters.length === 0">
+      <p>Майстрів за цією категорією не знайдено.</p>
     </div>
   </div>
 </div>

@@ -51,12 +51,12 @@
       "rating": 0,
       "service_categories": [
         {
-          "category_name": "Сантехніка",
-          "category_id": "Сантехніка"
+"category_id": 4,
+          "category_name": "Сантехніка"
         },
         {
-          "category_name": "Стелі",
-          "category_id": "Стелі"
+          "category_id": 1,
+          "category_name": "Стелі"
         }
       ],
       "services": [
@@ -78,6 +78,82 @@
       ],
       "reviews": [],
       "workPhotos": []
+    },
+    {
+      "id": "2",
+      "firstName": "Олександр",
+      "lastName": "Іванов",
+      "phone": "+380667778899",
+      "email": "oleksandr@example.com",
+      "experience": 3,
+      "rating": 4.5,
+      "description": "Майстер з ремонту квартир та офісів",
+      "service_categories": [
+        {
+          "category_id": 2,
+          "category_name": "Підлога"
+        },
+        {
+          "category_id": 3,
+          "category_name": "Стіни"
+        }
+      ],
+      "services": [
+        {
+          "subcategory_id": 201,
+          "subcategory_name": "Укладання ламінату",
+          "price_from": 150,
+          "price_to": 300
+        },
+        {
+          "subcategory_id": 301,
+          "subcategory_name": "Шпалери",
+          "price_from": 80,
+          "price_to": 150
+        }
+      ],
+      "avatar": "url_to_avatar_oleksandr",
+      "location": "Київ",
+      "available": true,
+      "reviews": []
+    },
+    {
+      "id": "3",
+      "firstName": "Марія",
+      "lastName": "Сидоренко",
+      "phone": "+380991112233",
+      "email": "maria@example.com",
+      "experience": 7,
+      "rating": 4.9,
+      "description": "Досвідчений майстер з ремонту та дизайну інтер'єру",
+      "service_categories": [
+        {
+          "category_id": 1,
+          "category_name": "Стелі"
+        },
+        {
+          "category_id": 4,
+          "category_name": "Сантехніка"
+        }
+      ],
+      "services": [
+        {
+          "subcategory_id": 102,
+          "subcategory_name": "Натяжні стелі",
+          "price_from": 350,
+          "price_to": 700
+        },
+        {
+          "subcategory_id": 402,
+          "subcategory_name": "Ремонт труб",
+          "price_from": 200,
+          "price_to": 400
+        }
+      ],
+      "avatar": "url_to_avatar_maria",
+      "location": "Львів",
+      "available": true,
+      "reviews": []
     }
   ],
   "companies": [

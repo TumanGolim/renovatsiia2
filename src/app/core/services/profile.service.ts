@@ -1,21 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-// Додаємо інтерфейси
-export interface ServiceCategory {
-  category_id: number;
-  category_name: string;
-  subcategories: Subcategory[];
-}
-
-export interface Subcategory {
-  subcategory_id: number;
-  subcategory_name: string;
-  description: string;
-  price_from: number;
-  price_to: number;
-}
+import { ServiceCategory } from '../models/services.model';
 
 @Injectable({
   providedIn: 'root',
@@ -32,5 +18,13 @@ export class ProfileService {
   // Додаємо правильну типізацію
   getServices(): Observable<ServiceCategory[]> {
     return this.http.get<ServiceCategory[]>(`${this.apiUrl}/serviceCategories`);
+  }
+
+  getMastersByCategory(categoryId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/masters?category_id=${categoryId}`);
+  }
+
+  getMastersBySubcategory(subcategoryId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/masters?subcategory_id=${subcategoryId}`);
   }
 }
