@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormsModule,
@@ -8,6 +8,9 @@ import {
   FormArray,
   Validators,
 } from '@angular/forms';
+
+import { ProfileService } from '../../../../core/services/profile.service';
+
 
 interface WorkCategory {
   name: string;
@@ -92,7 +95,10 @@ export class ProfileComponent implements OnInit {
     },
   ];
 
-  constructor(private fb: FormBuilder) {}
+  private profileService = inject(ProfileService);
+  private fb = inject(FormBuilder);
+
+  constructor() {}
 
   ngOnInit(): void {
     this.initForm();
@@ -200,28 +206,61 @@ export class ProfileComponent implements OnInit {
 
   // Відправка форми
   onSubmit(): void {
-    if (this.profileForm.valid) {
-      const profileData = {
-        ...this.profileForm.value,
-        profilePhoto: this.selectedPhoto,
-        workPhotos: this.workPhotos,
-      };
+  if (this.profileForm.valid) {
+    const profileData = this.prepareProfileData();
 
-      console.log('Профіль майстра:', profileData);
-      this.saveProfile(profileData);
-    } else {
-      this.markFormGroupTouched(this.profileForm);
-      alert("Будь ласка, заповніть усі обов'язкові поля коректно.");
-    }
+    this.profileService.createMasterProfile(profileData).subscribe({
+      next: (response) => {
+        alert('Профіль успішно збережено!');
+        console.log('Відповідь сервера:', response);
+      },
+      error: (error) => {
+        alert('Сталася помилка, спробуйте ще раз.');
+        console.error('Помилка:', error);
+      },
+    });
+  } else {
+    this.markFormGroupTouched(this.profileForm);
+    alert("Будь ласка, заповніть усі обов'язкові поля коректно.");
   }
-
-  // Збереження профілю (в майбутньому на сервер)
-  private saveProfile(profileData: any): void {
-    // Тут буде код для збереження даних на сервері
-    // Наразі просто показуємо повідомлення
-    setTimeout(() => {
-      alert('Профіль успішно збережено!');
-    }, 500);
+  }
+  
+  private prepareProfileData(): any {
+    const formValue = this.profileForm.value;
+  
+    return {
+      firstName: formValue.personalInfo.firstName,
+      lastName: formValue.personalInfo.lastName,
+      phone: formValue.personalInfo.phone,
+      experience: formValue.personalInfo.experience,
+      description: formValue.personalInfo.description,
+      avatar: this.selectedPhoto, // тут URL зберігаємо після завантаження файлу
+      location: 'Київ', // можна зробити поле в формі
+      available: true,
+      rating: 0,
+      service_categories: this.getUniqueCategories(formValue.skills),
+      services: formValue.skills.map((skill: any) => ({
+        subcategory_name: skill.subtype,
+        price_from: skill.price,
+        price_to: skill.price, // можна розширити, додавши поле для price_to
+      })),
+      reviews: [],
+      workPhotos: this.workPhotos.map((photo) => photo.src), // URL після завантаження
+    };
+  }
+  
+  // Допоміжний метод для унікальних категорій
+  private getUniqueCategories(skills: any[]): any[] {
+    const uniqueCategories = new Map();
+    skills.forEach((skill) => {
+      if (!uniqueCategories.has(skill.category)) {
+        uniqueCategories.set(skill.category, {
+          category_name: skill.category,
+          category_id: this.categories.find((c) => c.name === skill.category)?.name,
+        });
+      }
+    });
+    return Array.from(uniqueCategories.values());
   }
 
   // Допоміжний метод для позначення полів як "торкнуті"
