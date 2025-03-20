@@ -8,3 +8,18 @@
   gap: 5px;
   margin-top: 5px;
 }
+
+.category button {
+    margin-bottom: 5px;
+  }
+  
+  .category button.selected {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .subcategories button.selected {
+    background-color: #28a745;
+    color: white;
+  }
+  

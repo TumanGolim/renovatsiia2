@@ -5,12 +5,12 @@
     <div class="category-row d-flex flex-wrap gap-2">
       @for(category of serviceCategories; track category.category_id){
         <div class="category">
-          <button class="btn btn-primary" (click)="toggleSubcategories(category)">
+          <button class="btn btn-primary" [ngClass]="{'selected': category === selectedCategory}" (click)="toggleSubcategories(category)">
             {{ category.category_name }}
           </button>
           <div class="subcategories" *ngIf="category === selectedCategory">
             @for(subcategory of category.subcategories; track subcategory.subcategory_id){
-              <button class="btn btn-secondary" (click)="selectSubcategory(subcategory)">
+              <button class="btn btn-secondary" [ngClass]="{'selected': selectedSubcategories.includes(subcategory)}" (click)="selectSubcategory(subcategory)">
                 {{ subcategory.subcategory_name }}
               </button>
             }
@@ -20,21 +20,42 @@
     </div>
   </div>
 
-  <div *ngIf="selectedCategory">
-    <h2>Вибрана категорія: {{ selectedCategory.category_name }}</h2>
-    <div *ngIf="selectedSubcategory">
-      <h3>Вибрана підкатегорія: {{ selectedSubcategory.subcategory_name }}</h3>
-    </div>
-    <div *ngIf="masters.length > 0">
-      <h3>Майстри:</h3>
-      <ul>
-        @for(master of masters; track master.id){
-          <li>{{ master.firstName }} {{ master.lastName }} - {{ master.phone }}</li>
+  <div class="selected-subcategories">
+    <h4>Вибрані підкатегорії для фільтрації:</h4>
+    <ul>
+      @for(subcategory of selectedSubcategories; track subcategory.subcategory_id){
+        <li>{{ subcategory.subcategory_name }}</li>
+      }
+    </ul>
+  </div>
+  <div class="results-container">
+    <h2>Результати пошуку</h2>
+    <div *ngIf="filteredMasters.length > 0">
+      <div class="master-cards">
+        @for(master of filteredMasters; track master.id){
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ master.firstName }} {{ master.lastName }}</h5>
+              <p class="card-text">Телефон: {{ master.phone }}</p>
+              <p class="card-text">Категорії:</p>
+              <ul>
+                @for(category of master.service_categories; track category.category_id){
+                  <li>{{ category.category_name }}</li>
+                }
+              </ul>
+              <p class="card-text">Прайс-лист:</p>
+              <ul>
+                @for(service of master.services; track service.subcategory_id){
+                  <li>{{ service.subcategory_name }}: {{ service.price_from }} - {{ service.price_to }} грн</li>
+                }
+              </ul>
+            </div>
+          </div>
         }
-      </ul>
+      </div>
     </div>
-    <div *ngIf="masters.length === 0">
-      <p>Майстрів за цією категорією не знайдено.</p>
+    <div *ngIf="filteredMasters.length === 0">
+      <p>Майстрів за цими підкатегоріями не знайдено.</p>
     </div>
   </div>
 </div>

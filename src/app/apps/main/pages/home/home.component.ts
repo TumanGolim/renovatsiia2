@@ -14,8 +14,9 @@ import { ServiceCategory, Subcategory } from '../../../../core/models/services.m
 export class HomeComponent implements OnInit {
   serviceCategories: ServiceCategory[] = [];
   selectedCategory: ServiceCategory | null = null;
-  selectedSubcategory: Subcategory | null = null;
-  masters: any[] = [];
+  selectedSubcategories: Subcategory[] = [];
+  allMasters: any[] = [];
+  filteredMasters: any[] = [];
   private profileService = inject(ProfileService)
 
   ngOnInit(): void {
@@ -30,28 +31,26 @@ export class HomeComponent implements OnInit {
   }
 
   selectCategory(category: ServiceCategory): void {
-    this.selectedCategory = category;
-    this.selectedSubcategory = null;
-    this.loadMastersByCategory(category.category_id);
+    if (this.selectedCategory !== category) {
+      this.selectedCategory = category;
+    }
   }
 
   selectSubcategory(subcategory: Subcategory): void {
-    this.selectedSubcategory = subcategory;
-    this.loadMastersBySubcategory(subcategory.subcategory_id);
+    const index = this.selectedSubcategories.findIndex(s => s.subcategory_id === subcategory.subcategory_id);
+    if (index > -1) {
+      this.selectedSubcategories.splice(index, 1);
+    } else {
+      this.selectedSubcategories.push(subcategory);
+    }
+    this.loadMastersBySubcategories();
   }
 
-  loadMastersByCategory(categoryId: number): void {
-    this.profileService.getMastersByCategory(categoryId).subscribe(masters => {
-      this.masters = masters.filter(master => 
-        master.service_categories.some((category: { category_id: number }) => category.category_id === categoryId)
-      );
-    });
-  }
-
-  loadMastersBySubcategory(subcategoryId: number): void {
-    this.profileService.getMastersBySubcategory(subcategoryId).subscribe(masters => {
-      this.masters = masters.filter(master => 
-        master.services.some((service: { subcategory_id: number }) => service.subcategory_id === subcategoryId)
+  loadMastersBySubcategories(): void {
+    const subcategoryIds = this.selectedSubcategories.map(s => s.subcategory_id);
+    this.profileService.getMasters().subscribe(masters => {
+      this.filteredMasters = masters.filter(master =>
+        master.services.some((service: { subcategory_id: number }) => subcategoryIds.includes(service.subcategory_id))
       );
     });
   }

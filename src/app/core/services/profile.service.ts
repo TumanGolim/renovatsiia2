@@ -27,4 +27,8 @@ export class ProfileService {
   getMastersBySubcategory(subcategoryId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/masters?subcategory_id=${subcategoryId}`);
   }
+
+  getMasters(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/masters`);
+  }
 }
