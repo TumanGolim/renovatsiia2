@@ -1,0 +1,499 @@
+{
+  "masters": [
+    {
+      "id": "1",
+      "firstName": "Іван",
+      "lastName": "Петренко",
+      "phone": "+380501234567",
+      "email": "ivan@example.com",
+      "experience": 5,
+      "rating": 4.8,
+      "description": "Досвідчений майстер з ремонту",
+      "service_categories": [
+        {
+          "category_id": 1,
+          "category_name": "Стелі"
+        },
+        {
+          "category_id": 4,
+          "category_name": "Сантехніка"
+        }
+      ],
+      "services": [
+        {
+          "subcategory_id": 401,
+          "subcategory_name": "Встановлення ванни",
+          "price_from": 550,
+          "price_to": 900
+        },
+        {
+          "subcategory_id": 101,
+          "subcategory_name": "Фарбування стель",
+          "price_from": 120,
+          "price_to": 180
+        }
+      ],
+      "avatar": "url_to_avatar",
+      "location": "Київ",
+      "available": true,
+      "reviews": []
+    },
+    {
+      "id": "859e",
+      "firstName": "MAKSYM",
+      "lastName": "KOMKOV",
+      "phone": "+380988989238",
+      "experience": 1,
+      "description": "awdwadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasada awddddddddddddddddddd",
+      "avatar": null,
+      "location": "Київ",
+      "available": true,
+      "rating": 0,
+      "service_categories": [
+        {
+          "category_id": 4,
+          "category_name": "Сантехніка"
+        },
+        {
+          "category_id": 1,
+          "category_name": "Стелі"
+        }
+      ],
+      "services": [
+        {
+          "subcategory_name": "Встановлення душової кабіни",
+          "price_from": 231,
+          "price_to": 231
+        },
+        {
+          "subcategory_name": "Монтаж труб",
+          "price_from": 1232,
+          "price_to": 1232
+        },
+        {
+          "subcategory_name": "Гіпсокартон",
+          "price_from": 123,
+          "price_to": 123
+        }
+      ],
+      "reviews": [],
+      "workPhotos": []
+    },
+    {
+      "id": "2",
+      "firstName": "Олександр",
+      "lastName": "Іванов",
+      "phone": "+380667778899",
+      "email": "oleksandr@example.com",
+      "experience": 3,
+      "rating": 4.5,
+      "description": "Майстер з ремонту квартир та офісів",
+      "service_categories": [
+        {
+          "category_id": 2,
+          "category_name": "Підлога"
+        },
+        {
+          "category_id": 3,
+          "category_name": "Стіни"
+        }
+      ],
+      "services": [
+        {
+          "subcategory_id": 201,
+          "subcategory_name": "Укладання ламінату",
+          "price_from": 150,
+          "price_to": 300
+        },
+        {
+          "subcategory_id": 301,
+          "subcategory_name": "Шпалери",
+          "price_from": 80,
+          "price_to": 150
+        }
+      ],
+      "avatar": "url_to_avatar_oleksandr",
+      "location": "Київ",
+      "available": true,
+      "reviews": []
+    },
+    {
+      "id": "3",
+      "firstName": "Марія",
+      "lastName": "Сидоренко",
+      "phone": "+380991112233",
+      "email": "maria@example.com",
+      "experience": 7,
+      "rating": 4.9,
+      "description": "Досвідчений майстер з ремонту та дизайну інтер'єру",
+      "service_categories": [
+        {
+          "category_id": 1,
+          "category_name": "Стелі"
+        },
+        {
+          "category_id": 4,
+          "category_name": "Сантехніка"
+        }
+      ],
+      "services": [
+        {
+          "subcategory_id": 102,
+          "subcategory_name": "Натяжні стелі",
+          "price_from": 350,
+          "price_to": 700
+        },
+        {
+          "subcategory_id": 402,
+          "subcategory_name": "Ремонт труб",
+          "price_from": 200,
+          "price_to": 400
+        }
+      ],
+      "avatar": "url_to_avatar_maria",
+      "location": "Львів",
+      "available": true,
+      "reviews": []
+    },
+    {
+      "id": "4",
+      "firstName": "Петро",
+      "lastName": "Коваленко",
+      "phone": "+380934445566",
+      "email": "petro.kovalenko@example.com",
+      "experience": 10,
+      "rating": 4.7,
+      "description": "Досвідчений майстер з укладання плитки та монтажу сантехніки",
+      "service_categories": [
+        {
+          "category_id": 2,
+          "category_name": "Підлога"
+        },
+        {
+          "category_id": 4,
+          "category_name": "Сантехніка"
+        }
+      ],
+      "services": [
+        {
+          "subcategory_id": 203,
+          "subcategory_name": "Плитка",
+          "price_from": 220,
+          "price_to": 450
+        },
+        {
+          "subcategory_id": 401,
+          "subcategory_name": "Встановлення ванни",
+          "price_from": 600,
+          "price_to": 1200
+        }
+      ],
+      "avatar": "url_to_avatar_petro",
+      "location": "Київ",
+      "available": true,
+      "reviews": []
+    },
+    {
+      "id": "5",
+      "firstName": "Ольга",
+      "lastName": "Мельник",
+      "phone": "+380677778899",
+      "email": "olga.melnyk@example.com",
+      "experience": 5,
+      "rating": 4.8,
+      "description": "Спеціаліст з оздоблення стін та стель",
+      "service_categories": [
+        {
+          "category_id": 1,
+          "category_name": "Стелі"
+        },
+        {
+          "category_id": 3,
+          "category_name": "Стіни"
+        }
+      ],
+      "services": [
+        {
+          "subcategory_id": 103,
+          "subcategory_name": "Гіпсокартонні стелі",
+          "price_from": 280,
+          "price_to": 500
+        },
+        {
+          "subcategory_id": 302,
+          "subcategory_name": "Фарбування стін",
+          "price_from": 100,
+          "price_to": 200
+        }
+      ],
+      "avatar": "url_to_avatar_olga",
+      "location": "Одеса",
+      "available": true,
+      "reviews": []
+    },
+    {
+      "id": "6",
+      "firstName": "Андрій",
+      "lastName": "Шевченко",
+      "phone": "+380501112233",
+      "email": "andrii.shevchenko@example.com",
+      "experience": 8,
+      "rating": 4.9,
+      "description": "Майстер з укладання підлогових покриттів",
+      "service_categories": [
+        {
+          "category_id": 2,
+          "category_name": "Підлога"
+        }
+      ],
+      "services": [
+        {
+          "subcategory_id": 201,
+          "subcategory_name": "Укладання ламінату",
+          "price_from": 180,
+          "price_to": 350
+        },
+        {
+          "subcategory_id": 202,
+          "subcategory_name": "Паркет",
+          "price_from": 450,
+          "price_to": 850
+        }
+      ],
+      "avatar": "url_to_avatar_andrii",
+      "location": "Львів",
+      "available": true,
+      "reviews": []
+    },
+    {
+      "id": "7",
+      "firstName": "Наталія",
+      "lastName": "Ковальчук",
+      "phone": "+380978889900",
+      "email": "nataliia.kovalchuk@example.com",
+      "experience": 6,
+      "rating": 4.6,
+      "description": "Майстер з декоративних робіт та оздоблення стін",
+      "service_categories": [
+        {
+          "category_id": 3,
+          "category_name": "Стіни"
+        }
+      ],
+      "services": [
+        {
+          "subcategory_id": 301,
+          "subcategory_name": "Шпалери",
+          "price_from": 90,
+          "price_to": 170
+        },
+        {
+          "subcategory_id": 303,
+          "subcategory_name": "Декоративна штукатурка",
+          "price_from": 350,
+          "price_to": 550
+        }
+      ],
+      "avatar": "url_to_avatar_nataliia",
+      "location": "Київ",
+      "available": true,
+      "reviews": []
+    }
+  ],
+  "companies": [
+    {
+      "id": "1",
+      "companyName": "Ремонт Експерт",
+      "phone": "+380671234567",
+      "email": "info@remont-expert.com",
+      "address": "вул. Будівельна 10, Київ",
+      "description": "Професійний ремонт квартир та офісів",
+      "service_categories": [
+        {
+          "category_id": 1,
+          "category_name": "Стелі"
+        },
+        {
+          "category_id": 4,
+          "category_name": "Сантехніка"
+        }
+      ],
+      "services": [
+        {
+          "subcategory_id": 101,
+          "subcategory_name": "Фарбування стель",
+          "price_from": 150,
+          "price_to": 250
+        },
+        {
+          "subcategory_id": 102,
+          "subcategory_name": "Натяжні стелі",
+          "price_from": 350,
+          "price_to": 700
+        }
+      ],
+      "logo": "url_to_logo",
+      "website": "www.remont-expert.com",
+      "rating": 4.9,
+      "reviews": []
+    }
+  ],
+  "reviews": [
+    {
+      "id": "1",
+      "targetId": "1",
+      "targetType": "master",
+      "authorName": "Марія",
+      "rating": 5,
+      "comment": "Відмінна робота, дуже задоволена результатом",
+      "date": "2024-03-19",
+      "photos": ["url1", "url2"]
+    }
+  ],
+  "serviceCategories": [
+    {
+      "category_id": 1,
+      "category_name": "Стелі",
+      "subcategories": [
+        {
+          "subcategory_id": 101,
+          "subcategory_name": "Фарбування стель",
+          "description": "Послуги з фарбування стель у різних кольорах",
+          "price_from": 100,
+          "price_to": 200
+        },
+        {
+          "subcategory_id": 102,
+          "subcategory_name": "Натяжні стелі",
+          "description": "Встановлення натяжних стель (ПВХ, тканинні)",
+          "price_from": 300,
+          "price_to": 600
+        },
+        {
+          "subcategory_id": 103,
+          "subcategory_name": "Гіпсокартонні стелі",
+          "description": "Монтаж стель із гіпсокартону",
+          "price_from": 250,
+          "price_to": 450
+        }
+      ]
+    },
+    {
+      "category_id": 2,
+      "category_name": "Підлога",
+      "subcategories": [
+        {
+          "subcategory_id": 201,
+          "subcategory_name": "Укладання ламінату",
+          "description": "Професійне укладання ламінату",
+          "price_from": 150,
+          "price_to": 300
+        },
+        {
+          "subcategory_id": 202,
+          "subcategory_name": "Паркет",
+          "description": "Укладання та реставрація паркету",
+          "price_from": 400,
+          "price_to": 800
+        },
+        {
+          "subcategory_id": 203,
+          "subcategory_name": "Плитка",
+          "description": "Укладання керамічної плитки на підлогу",
+          "price_from": 200,
+          "price_to": 400
+        }
+      ]
+    },
+    {
+      "category_id": 3,
+      "category_name": "Стіни",
+      "subcategories": [
+        {
+          "subcategory_id": 301,
+          "subcategory_name": "Шпалери",
+          "description": "Поклейка шпалер усіх типів",
+          "price_from": 80,
+          "price_to": 150
+        },
+        {
+          "subcategory_id": 302,
+          "subcategory_name": "Фарбування стін",
+          "description": "Фарбування стін у квартирах та офісах",
+          "price_from": 90,
+          "price_to": 180
+        },
+        {
+          "subcategory_id": 303,
+          "subcategory_name": "Декоративна штукатурка",
+          "description": "Нанесення декоративної штукатурки",
+          "price_from": 300,
+          "price_to": 500
+        }
+      ]
+    },
+    {
+      "category_id": 4,
+      "category_name": "Сантехніка",
+      "subcategories": [
+        {
+          "subcategory_id": 401,
+          "subcategory_name": "Встановлення ванни",
+          "description": "Монтаж ванн різних типів",
+          "price_from": 500,
+          "price_to": 1000
+        },
+        {
+          "subcategory_id": 402,
+          "subcategory_name": "Ремонт труб",
+          "description": "Заміна та ремонт водопровідних труб",
+          "price_from": 200,
+          "price_to": 400
+        },
+        {
+          "subcategory_id": 403,
+          "subcategory_name": "Установка унітазу",
+          "description": "Монтаж та підключення унітазів",
+          "price_from": 300,
+          "price_to": 600
+        }
+      ]
+    }
+  ],
+  "services": [
+    {
+      "id": "1",
+      "categoryId": "2",
+      "name": "Монтаж натяжної стелі",
+      "slug": "stretch-ceiling-installation",
+      "description": "Професійний монтаж натяжної стелі",
+      "priceRange": {
+        "min": 250,
+        "max": 500
+      }
+    }
+  ],
+  "serviceGroups": [
+    {
+      "id": "1",
+      "categoryId": "1",
+      "name": "Декоративна обробка",
+      "services": ["1", "2", "3"],
+      "description": "Комплекс робіт з декоративної обробки стін"
+    }
+  ],
+  "projects": [
+    {
+      "id": "1",
+      "masterId": "1",
+      "title": "Ремонт ванної кімнати",
+      "description": "Повний ремонт ванної кімнати під ключ",
+      "status": "completed",
+      "startDate": "2024-02-01",
+      "endDate": "2024-02-15",
+      "photos": ["url1", "url2"],
+      "cost": 25000,
+      "location": "Київ"
+    }
+  ]
+}

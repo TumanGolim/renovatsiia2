@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
+import { CommonModule, } from '@angular/common';
 
-interface WorkType {
-  name: string;
-  subtypes: string[];
-}
+import { ProfileService } from '../../../../core/services/profile.service';
+import { ServiceCategory, Subcategory } from '../../../../core/models/services.model';
 
 @Component({
   selector: 'app-home',
@@ -13,72 +11,91 @@ interface WorkType {
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {
-  selectedCategory: string | null = null;
+export class HomeComponent implements OnInit {
+  serviceCategories: ServiceCategory[] = [];
+  selectedCategory: ServiceCategory | null = null;
+  selectedSubcategories: Subcategory[] = [];
+  allMasters: any[] = [];
+  filteredMasters: any[] = [];
+  private profileService = inject(ProfileService)
 
-  categories: WorkType[] = [
-    {
-      name: 'Стены',
-      subtypes: [
-        'Покраска',
-        'Обои',
-        'Штукатурка',
-        'Плитка',
-        'Декоративная отделка',
-      ],
-    },
-    {
-      name: 'Потолки',
-      subtypes: ['Натяжные', 'Гипсокартон', 'Покраска', 'Подвесные'],
-    },
-    {
-      name: 'Пол',
-      subtypes: ['Ламинат', 'Плитка', 'Паркет', 'Линолеум', 'Стяжка'],
-    },
-    {
-      name: 'Сантехника',
-      subtypes: [
-        'Установка ванны',
-        'Установка душевой кабины',
-        'Монтаж труб',
-        'Установка раковины',
-        'Подключение стиральной машины',
-      ],
-    },
-    {
-      name: 'Электрика',
-      subtypes: [
-        'Проводка',
-        'Установка розеток',
-        'Монтаж освещения',
-        'Электрощит',
-      ],
-    },
-    {
-      name: 'Двери и окна',
-      subtypes: ['Установка дверей', 'Установка окон', 'Откосы', 'Подоконники'],
-    },
-    {
-      name: 'Балкон и лоджия',
-      subtypes: ['Остекление', 'Утепление', 'Отделка'],
-    },
-    {
-      name: 'Дополнительные работы',
-      subtypes: ['Уборка', 'Вывоз мусора', 'Демонтаж', 'Дизайн интерьера'],
-    },
-  ];
+  ngOnInit(): void {
+    this.loadServiceCategories()
+  }
 
-  selectCategory(category: string): void {
+  loadServiceCategories(): void {
+    this.profileService.getServices().subscribe(categories => {
+      this.serviceCategories = categories;
+      console.log(this.serviceCategories)
+    });
+  }
+
+  selectCategory(category: ServiceCategory): void {
+    if (this.selectedCategory !== category) {
+      this.selectedCategory = category;
+    }
+  }
+
+  selectSubcategory(subcategory: Subcategory): void {
+    const index = this.selectedSubcategories.findIndex(s => s.subcategory_id === subcategory.subcategory_id);
+    if (index > -1) {
+      this.selectedSubcategories.splice(index, 1);
+    } else {
+      this.selectedSubcategories.push(subcategory);
+    }
+    this.loadMastersBySubcategories();
+  }
+
+  loadMastersBySubcategories(): void {
+    const subcategoryIds = this.selectedSubcategories.map(s => s.subcategory_id);
+    
+    if (subcategoryIds.length === 0) {
+      this.filteredMasters = [];
+      return;
+    }
+    
+    this.profileService.getMasters().subscribe(masters => {
+
+      this.filteredMasters = masters.filter(master => 
+        master.services.some((service: { subcategory_id: number }) => 
+          subcategoryIds.includes(service.subcategory_id)
+        )
+      );
+  
+      this.filteredMasters.sort((a, b) => {
+
+        const aMatches = subcategoryIds.filter(id => 
+          a.services.some((service: { subcategory_id: number }) => service.subcategory_id === id)
+        ).length;
+        
+        const bMatches = subcategoryIds.filter(id => 
+          b.services.some((service: { subcategory_id: number }) => service.subcategory_id === id)
+        ).length;
+
+        if (bMatches !== aMatches) {
+          return bMatches - aMatches;
+        }
+
+        return b.rating - a.rating;
+      });
+    });
+  }
+
+  findCategoryIdForSubcategory(subcategoryId: number): number | undefined {
+    for (const category of this.serviceCategories) {
+      const subcategory = category.subcategories.find(s => s.subcategory_id === subcategoryId);
+      if (subcategory) {
+        return category.category_id;
+      }
+    }
+    return undefined;
+  }
+
+  toggleSubcategories(category: ServiceCategory): void {
     if (this.selectedCategory === category) {
       this.selectedCategory = null;
     } else {
       this.selectedCategory = category;
     }
-  }
-
-  selectSubtype(category: string, subtype: string): void {
-    // Просто логируем выбор подкатегории без перехода на другую страницу
-    console.log(`Выбрана категория: ${category}, подкатегория: ${subtype}`);
-    // Здесь в будущем может быть дополнительная логика
   }
 }
