@@ -51,7 +51,7 @@
       "rating": 0,
       "service_categories": [
         {
-"category_id": 4,
+          "category_id": 4,
           "category_name": "Сантехніка"
         },
         {
@@ -154,6 +154,150 @@
       "location": "Львів",
       "available": true,
       "reviews": []
+    },
+    {
+      "id": "4",
+      "firstName": "Петро",
+      "lastName": "Коваленко",
+      "phone": "+380934445566",
+      "email": "petro.kovalenko@example.com",
+      "experience": 10,
+      "rating": 4.7,
+      "description": "Досвідчений майстер з укладання плитки та монтажу сантехніки",
+      "service_categories": [
+        {
+          "category_id": 2,
+          "category_name": "Підлога"
+        },
+        {
+          "category_id": 4,
+          "category_name": "Сантехніка"
+        }
+      ],
+      "services": [
+        {
+          "subcategory_id": 203,
+          "subcategory_name": "Плитка",
+          "price_from": 220,
+          "price_to": 450
+        },
+        {
+          "subcategory_id": 401,
+          "subcategory_name": "Встановлення ванни",
+          "price_from": 600,
+          "price_to": 1200
+        }
+      ],
+      "avatar": "url_to_avatar_petro",
+      "location": "Київ",
+      "available": true,
+      "reviews": []
+    },
+    {
+      "id": "5",
+      "firstName": "Ольга",
+      "lastName": "Мельник",
+      "phone": "+380677778899",
+      "email": "olga.melnyk@example.com",
+      "experience": 5,
+      "rating": 4.8,
+      "description": "Спеціаліст з оздоблення стін та стель",
+      "service_categories": [
+        {
+          "category_id": 1,
+          "category_name": "Стелі"
+        },
+        {
+          "category_id": 3,
+          "category_name": "Стіни"
+        }
+      ],
+      "services": [
+        {
+          "subcategory_id": 103,
+          "subcategory_name": "Гіпсокартонні стелі",
+          "price_from": 280,
+          "price_to": 500
+        },
+        {
+          "subcategory_id": 302,
+          "subcategory_name": "Фарбування стін",
+          "price_from": 100,
+          "price_to": 200
+        }
+      ],
+      "avatar": "url_to_avatar_olga",
+      "location": "Одеса",
+      "available": true,
+      "reviews": []
+    },
+    {
+      "id": "6",
+      "firstName": "Андрій",
+      "lastName": "Шевченко",
+      "phone": "+380501112233",
+      "email": "andrii.shevchenko@example.com",
+      "experience": 8,
+      "rating": 4.9,
+      "description": "Майстер з укладання підлогових покриттів",
+      "service_categories": [
+        {
+          "category_id": 2,
+          "category_name": "Підлога"
+        }
+      ],
+      "services": [
+        {
+          "subcategory_id": 201,
+          "subcategory_name": "Укладання ламінату",
+          "price_from": 180,
+          "price_to": 350
+        },
+        {
+          "subcategory_id": 202,
+          "subcategory_name": "Паркет",
+          "price_from": 450,
+          "price_to": 850
+        }
+      ],
+      "avatar": "url_to_avatar_andrii",
+      "location": "Львів",
+      "available": true,
+      "reviews": []
+    },
+    {
+      "id": "7",
+      "firstName": "Наталія",
+      "lastName": "Ковальчук",
+      "phone": "+380978889900",
+      "email": "nataliia.kovalchuk@example.com",
+      "experience": 6,
+      "rating": 4.6,
+      "description": "Майстер з декоративних робіт та оздоблення стін",
+      "service_categories": [
+        {
+          "category_id": 3,
+          "category_name": "Стіни"
+        }
+      ],
+      "services": [
+        {
+          "subcategory_id": 301,
+          "subcategory_name": "Шпалери",
+          "price_from": 90,
+          "price_to": 170
+        },
+        {
+          "subcategory_id": 303,
+          "subcategory_name": "Декоративна штукатурка",
+          "price_from": 350,
+          "price_to": 550
+        }
+      ],
+      "avatar": "url_to_avatar_nataliia",
+      "location": "Київ",
+      "available": true,
+      "reviews": []
     }
   ],
   "companies": [
@@ -203,10 +347,7 @@
       "rating": 5,
       "comment": "Відмінна робота, дуже задоволена результатом",
       "date": "2024-03-19",
-      "photos": [
-        "url1",
-        "url2"
-      ]
+      "photos": ["url1", "url2"]
     }
   ],
   "serviceCategories": [
@@ -337,11 +478,7 @@
       "id": "1",
       "categoryId": "1",
       "name": "Декоративна обробка",
-      "services": [
-        "1",
-        "2",
-        "3"
-      ],
+      "services": ["1", "2", "3"],
       "description": "Комплекс робіт з декоративної обробки стін"
     }
   ],
@@ -354,10 +491,7 @@
       "status": "completed",
       "startDate": "2024-02-01",
       "endDate": "2024-02-15",
-      "photos": [
-        "url1",
-        "url2"
-      ],
+      "photos": ["url1", "url2"],
       "cost": 25000,
       "location": "Київ"
     }

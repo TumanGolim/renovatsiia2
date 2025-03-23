@@ -48,11 +48,47 @@ export class HomeComponent implements OnInit {
 
   loadMastersBySubcategories(): void {
     const subcategoryIds = this.selectedSubcategories.map(s => s.subcategory_id);
+    
+    if (subcategoryIds.length === 0) {
+      this.filteredMasters = [];
+      return;
+    }
+    
     this.profileService.getMasters().subscribe(masters => {
-      this.filteredMasters = masters.filter(master =>
-        master.services.some((service: { subcategory_id: number }) => subcategoryIds.includes(service.subcategory_id))
+
+      this.filteredMasters = masters.filter(master => 
+        master.services.some((service: { subcategory_id: number }) => 
+          subcategoryIds.includes(service.subcategory_id)
+        )
       );
+  
+      this.filteredMasters.sort((a, b) => {
+
+        const aMatches = subcategoryIds.filter(id => 
+          a.services.some((service: { subcategory_id: number }) => service.subcategory_id === id)
+        ).length;
+        
+        const bMatches = subcategoryIds.filter(id => 
+          b.services.some((service: { subcategory_id: number }) => service.subcategory_id === id)
+        ).length;
+
+        if (bMatches !== aMatches) {
+          return bMatches - aMatches;
+        }
+
+        return b.rating - a.rating;
+      });
     });
+  }
+
+  findCategoryIdForSubcategory(subcategoryId: number): number | undefined {
+    for (const category of this.serviceCategories) {
+      const subcategory = category.subcategories.find(s => s.subcategory_id === subcategoryId);
+      if (subcategory) {
+        return category.category_id;
+      }
+    }
+    return undefined;
   }
 
   toggleSubcategories(category: ServiceCategory): void {
