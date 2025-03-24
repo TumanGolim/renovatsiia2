@@ -298,6 +298,53 @@
       "location": "Київ",
       "available": true,
       "reviews": []
+    },
+    {
+      "id": "66cb",
+      "firstName": "Абдул",
+      "lastName": "Иванов",
+      "phone": "+380777777777",
+      "email": "maga@gmail.com",
+      "experience": 1,
+      "description": "                                                          ",
+      "location": "Одесса",
+      "available": true,
+      "service_categories": [
+        {
+          "category_id": 2,
+          "category_name": "Підлога"
+        },
+        {
+          "category_id": 1,
+          "category_name": "Стелі"
+        },
+        {
+          "category_id": 4,
+          "category_name": "Сантехніка"
+        }
+      ],
+      "services": [
+        {
+          "subcategory_id": 203,
+          "subcategory_name": "Плитка",
+          "price_from": 200,
+          "price_to": 500
+        },
+        {
+          "subcategory_id": 101,
+          "subcategory_name": "Фарбування стель",
+          "price_from": 100,
+          "price_to": 400
+        },
+        {
+          "subcategory_id": 401,
+          "subcategory_name": "Встановлення ванни",
+          "price_from": 500,
+          "price_to": 700
+        }
+      ],
+      "avatar": "",
+      "reviews": []
     }
   ],
   "companies": [
@@ -347,7 +394,10 @@
       "rating": 5,
       "comment": "Відмінна робота, дуже задоволена результатом",
       "date": "2024-03-19",
-      "photos": ["url1", "url2"]
+      "photos": [
+        "url1",
+        "url2"
+      ]
     }
   ],
   "serviceCategories": [
@@ -376,7 +426,8 @@
           "price_from": 250,
           "price_to": 450
         }
-      ]
+      ],
+      "id": "bd1d"
     },
     {
       "category_id": 2,
@@ -403,7 +454,8 @@
           "price_from": 200,
           "price_to": 400
         }
-      ]
+      ],
+      "id": "72c2"
     },
     {
       "category_id": 3,
@@ -430,7 +482,8 @@
           "price_from": 300,
           "price_to": 500
         }
-      ]
+      ],
+      "id": "6d1b"
     },
     {
       "category_id": 4,
@@ -457,7 +510,8 @@
           "price_from": 300,
           "price_to": 600
         }
-      ]
+      ],
+      "id": "3d34"
     }
   ],
   "services": [
@@ -478,7 +532,11 @@
       "id": "1",
       "categoryId": "1",
       "name": "Декоративна обробка",
-      "services": ["1", "2", "3"],
+      "services": [
+        "1",
+        "2",
+        "3"
+      ],
       "description": "Комплекс робіт з декоративної обробки стін"
     }
   ],
@@ -491,7 +549,10 @@
       "status": "completed",
       "startDate": "2024-02-01",
       "endDate": "2024-02-15",
-      "photos": ["url1", "url2"],
+      "photos": [
+        "url1",
+        "url2"
+      ],
       "cost": 25000,
       "location": "Київ"
     }

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormsModule,
@@ -9,26 +9,48 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { ProfileService } from '../../../../core/services/profile.service';
-
-interface ServiceCategory {
+interface WorkCategory {
   category_id: number;
   category_name: string;
-  subcategories: Subcategory[];
-}
-
-interface Subcategory {
-  subcategory_id: number;
-  subcategory_name: string;
-  description: string;
-  price_from: number;
-  price_to: number;
+  subcategories: {
+    subcategory_id: number;
+    subcategory_name: string;
+  }[];
 }
 
 interface WorkPhoto {
   id: number;
   src: string | ArrayBuffer;
   title?: string;
+}
+
+interface ServiceCategory {
+  category_id: number;
+  category_name: string;
+}
+
+interface Service {
+  subcategory_id: number;
+  subcategory_name: string;
+  price_from: number;
+  price_to: number;
+}
+
+interface ProfileData {
+  id?: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  experience: number;
+  rating?: number;
+  description: string;
+  service_categories: ServiceCategory[];
+  services: Service[];
+  avatar?: string;
+  location?: string;
+  available: boolean;
+  reviews: any[];
 }
 
 @Component({
@@ -39,26 +61,99 @@ interface WorkPhoto {
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent implements OnInit {
-  profileForm!: FormGroup;
-  selectedPhoto: string | ArrayBuffer | null = null;
-  workPhotos: WorkPhoto[] = [];
-  nextPhotoId = 1;
-  selectedCategory: string | null = null;
-  categories: ServiceCategory[] = [];
+  public profileForm!: FormGroup;
+  public selectedPhoto: string | ArrayBuffer | null = null;
+  public workPhotos: WorkPhoto[] = [];
+  public nextPhotoId = 1;
+  public selectedCategory: string | null = null;
 
-  private profileService = inject(ProfileService);
-  private fb = inject(FormBuilder);
+  // Перелік категорій робіт
+  public categories: WorkCategory[] = [
+    {
+      category_id: 1,
+      category_name: 'Стелі',
+      subcategories: [
+        { subcategory_id: 101, subcategory_name: 'Фарбування стель' },
+        { subcategory_id: 102, subcategory_name: 'Натяжні' },
+        { subcategory_id: 103, subcategory_name: 'Гіпсокартонні стелі' },
+      ],
+    },
+    {
+      category_id: 2,
+      category_name: 'Підлога',
+      subcategories: [
+        { subcategory_id: 201, subcategory_name: 'Укладання ламінату' },
+        { subcategory_id: 202, subcategory_name: 'Паркет' },
+        { subcategory_id: 203, subcategory_name: 'Плитка' },
+      ],
+    },
+    {
+      category_id: 3,
+      category_name: 'Стіни',
+      subcategories: [
+        { subcategory_id: 301, subcategory_name: 'Шпалери' },
+        { subcategory_id: 302, subcategory_name: 'Фарбування стін' },
+        { subcategory_id: 303, subcategory_name: 'Декоративна штукатурка' },
+      ],
+    },
+    {
+      category_id: 4,
+      category_name: 'Сантехніка',
+      subcategories: [
+        { subcategory_id: 401, subcategory_name: 'Встановлення ванни' },
+        { subcategory_id: 402, subcategory_name: 'Ремонт труб' },
+        { subcategory_id: 403, subcategory_name: 'Установка унітазу' },
+      ],
+    },
+    {
+      category_id: 5,
+      category_name: 'Електрика',
+      subcategories: [
+        { subcategory_id: 501, subcategory_name: 'Проводка' },
+        { subcategory_id: 502, subcategory_name: 'Встановлення розеток' },
+        { subcategory_id: 503, subcategory_name: 'Монтаж освітлення' },
+        { subcategory_id: 504, subcategory_name: 'Електрощит' },
+      ],
+    },
+    {
+      category_id: 6,
+      category_name: 'Двері та вікна',
+      subcategories: [
+        { subcategory_id: 601, subcategory_name: 'Встановлення дверей' },
+        { subcategory_id: 602, subcategory_name: 'Встановлення вікон' },
+        { subcategory_id: 603, subcategory_name: 'Відкоси' },
+        { subcategory_id: 604, subcategory_name: 'Підвіконня' },
+      ],
+    },
+    {
+      category_id: 7,
+      category_name: 'Балкон та лоджія',
+      subcategories: [
+        { subcategory_id: 701, subcategory_name: 'Засклення' },
+        { subcategory_id: 702, subcategory_name: 'Утеплення' },
+        { subcategory_id: 703, subcategory_name: 'Оздоблення' },
+      ],
+    },
+    {
+      category_id: 8,
+      category_name: 'Додаткові роботи',
+      subcategories: [
+        { subcategory_id: 801, subcategory_name: 'Прибирання' },
+        { subcategory_id: 802, subcategory_name: 'Вивіз сміття' },
+        { subcategory_id: 803, subcategory_name: 'Демонтаж' },
+        { subcategory_id: 804, subcategory_name: "Дизайн інтер'єру" },
+      ],
+    },
+  ];
 
-  constructor() {}
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.initForm();
     this.loadSavedData();
-    this.loadServices();
   }
 
-  // Ініціалізація форми
-  private initForm(): void {
+  public initForm(): void {
     this.profileForm = this.fb.group({
       personalInfo: this.fb.group({
         firstName: ['', [Validators.required]],
@@ -67,72 +162,55 @@ export class ProfileComponent implements OnInit {
           '',
           [Validators.required, Validators.pattern(/^\+?[0-9]{10,12}$/)],
         ],
+        email: ['', [Validators.required, Validators.email]],
         experience: [0, [Validators.required, Validators.min(0)]],
         description: ['', [Validators.required, Validators.minLength(50)]],
+        location: [''],
+        available: [true],
       }),
       skills: this.fb.array([]),
     });
   }
 
-  // Завантаження збережених даних (в майбутньому з API)
-  private loadSavedData(): void {
+  public loadSavedData(): void {
     // Тут буде код для завантаження даних профілю з сервера
     // Наразі залишаємо пустим або можна додати тестові дані
   }
 
-  // Додаємо новий метод для завантаження сервісів
-  private loadServices(): void {
-    this.profileService.getServices().subscribe({
-      next: (services: ServiceCategory[]) => {
-        console.log('Завантажені сервіси:', services);
-        this.categories = services;
-      },
-      error: (error) => {
-        console.error('Помилка при завантаженні сервісів:', error);
-      }
-    });
-  }
-
-  // Геттер для доступу до масиву навичок
-  get skillsArray(): FormArray {
+  public get skillsArray(): FormArray {
     return this.profileForm.get('skills') as FormArray;
   }
 
-  // Метод для вибору категорії
-  selectCategory(category: string): void {
+  public selectCategory(category: string): void {
     this.selectedCategory =
       this.selectedCategory === category ? null : category;
   }
 
-  // Додавання навички
-  addSkill(category: ServiceCategory, subcategory: Subcategory): void {
+  public addSkill(category: any, subtype: any): void {
     const exists = this.skillsArray.controls.some(
       (control) =>
-        control.get('category_id')?.value === category.category_id &&
-        control.get('subcategory_id')?.value === subcategory.subcategory_id
+        control.get('subcategory_id')?.value === subtype.subcategory_id
     );
 
     if (!exists) {
       const skillGroup = this.fb.group({
-        category_id: [category.category_id, Validators.required],
-        category_name: [category.category_name, Validators.required],
-        subcategory_id: [subcategory.subcategory_id, Validators.required],
-        subcategory_name: [subcategory.subcategory_name, Validators.required],
-        price_from: [subcategory.price_from, [Validators.required, Validators.min(0)]],
-        price_to: [subcategory.price_to, [Validators.required, Validators.min(0)]]
+        category_id: [category.category_id],
+        category_name: [category.category_name],
+        subcategory_id: [subtype.subcategory_id],
+        subcategory_name: [subtype.subcategory_name],
+        price_from: [0, [Validators.required, Validators.min(0)]],
+        price_to: [0, [Validators.required, Validators.min(0)]],
       });
 
       this.skillsArray.push(skillGroup);
     }
   }
 
-  // Видалення навички
-  removeSkill(index: number): void {
+  public removeSkill(index: number): void {
     this.skillsArray.removeAt(index);
   }
 
-  // Обробка вибору фотографії профілю
-  onProfilePhotoSelected(event: Event): void {
+  public onProfilePhotoSelected(event: Event): void {
     const file = (event.target as HTMLInputElement).files?.[0];
 
     if (file) {
@@ -144,8 +222,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  // Обробка вибору фотографій робіт
-  onWorkPhotoSelected(event: Event): void {
+  public onWorkPhotoSelected(event: Event): void {
     const files = (event.target as HTMLInputElement).files;
 
     if (files && files.length > 0) {
@@ -167,73 +244,81 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  // Видалення фотографії роботи
-  removeWorkPhoto(photoId: number): void {
+  public removeWorkPhoto(photoId: number): void {
     this.workPhotos = this.workPhotos.filter((photo) => photo.id !== photoId);
   }
 
-  // Відправка форми
-  onSubmit(): void {
-  if (this.profileForm.valid) {
-    const profileData = this.prepareProfileData();
+  public onSubmit(): void {
+    if (this.profileForm.valid) {
+      const formValue = this.profileForm.value;
+      const skills = this.skillsArray.value;
 
-    this.profileService.createMasterProfile(profileData).subscribe({
-      next: (response) => {
-        alert('Профіль успішно збережено!');
-        console.log('Відповідь сервера:', response);
-      },
-      error: (error) => {
-        alert('Сталася помилка, спробуйте ще раз.');
-        console.error('Помилка:', error);
-      },
-    });
-  } else {
-    this.markFormGroupTouched(this.profileForm);
-    alert("Будь ласка, заповніть усі обов'язкові поля коректно.");
+      const profileData: ProfileData = {
+        firstName: formValue.personalInfo.firstName,
+        lastName: formValue.personalInfo.lastName,
+        phone: formValue.personalInfo.phone,
+        email: formValue.personalInfo.email,
+        experience: formValue.personalInfo.experience,
+        description: formValue.personalInfo.description,
+        location: formValue.personalInfo.location || '',
+        available: formValue.personalInfo.available,
+        // Группируем категории услуг
+        service_categories: this.getUniqueCategories(skills),
+        // Преобразуем навыки в услуги
+        services: skills.map((skill: any) => ({
+          subcategory_id: skill.subcategory_id,
+          subcategory_name: skill.subcategory_name,
+          price_from: skill.price_from,
+          price_to: skill.price_to,
+        })),
+        avatar: (this.selectedPhoto as string) || '',
+        reviews: [],
+      };
+
+      console.log('Профіль майстра:', profileData);
+      this.saveProfile(profileData);
+    } else {
+      this.markFormGroupTouched(this.profileForm);
+      alert("Будь ласка, заповніть усі обов'язкові поля коректно.");
+    }
   }
-  }
-  
-  private prepareProfileData(): any {
-    const formValue = this.profileForm.value;
-  
-    return {
-      firstName: formValue.personalInfo.firstName,
-      lastName: formValue.personalInfo.lastName,
-      phone: formValue.personalInfo.phone,
-      experience: formValue.personalInfo.experience,
-      description: formValue.personalInfo.description,
-      avatar: this.selectedPhoto,
-      location: 'Київ',
-      available: true,
-      rating: 0,
-      service_categories: this.getUniqueCategories(formValue.skills),
-      services: formValue.skills.map((skill: any) => ({
-        subcategory_id: skill.subcategory_id,
-        subcategory_name: skill.subcategory_name,
-        price_from: skill.price_from,
-        price_to: skill.price_to
-      })),
-      reviews: [],
-      workPhotos: this.workPhotos.map((photo) => photo.src)
-    };
-  }
-  
-  // Допоміжний метод для унікальних категорій
-  private getUniqueCategories(skills: any[]): any[] {
-    const uniqueCategories = new Map();
+
+  public getUniqueCategories(skills: any[]): ServiceCategory[] {
+    const uniqueCategories = new Map<number, ServiceCategory>();
+
     skills.forEach((skill) => {
       if (!uniqueCategories.has(skill.category_id)) {
         uniqueCategories.set(skill.category_id, {
           category_id: skill.category_id,
-          category_name: skill.category_name
+          category_name: skill.category_name,
         });
       }
     });
+
     return Array.from(uniqueCategories.values());
   }
 
-  // Допоміжний метод для позначення полів як "торкнуті"
-  private markFormGroupTouched(formGroup: FormGroup): void {
+  public saveProfile(profileData: ProfileData): void {
+    // Здесь будет отправка данных на сервер
+    fetch('http://localhost:3000/masters', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(profileData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Success:', data);
+        alert('Профіль успішно збережено!');
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        alert('Помилка при збереженні профілю');
+      });
+  }
+
+  public markFormGroupTouched(formGroup: FormGroup): void {
     Object.values(formGroup.controls).forEach((control) => {
       control.markAsTouched();
 

@@ -77,6 +77,43 @@
           </div>
         </div>
 
+        <div class="form-group">
+          <label for="email">Email*</label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            placeholder="example@email.com"
+          />
+          <div
+            class="error-message"
+            *ngIf="
+              profileForm.get('personalInfo')?.get('email')?.invalid &&
+              (profileForm.get('personalInfo')?.get('email')?.touched ||
+                profileForm.get('personalInfo')?.get('email')?.dirty)
+            "
+          >
+            Введіть коректну email адресу
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="location">Місто</label>
+          <input
+            type="text"
+            id="location"
+            formControlName="location"
+            placeholder="Введіть ваше місто"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" formControlName="available" />
+            Доступний для замовлень
+          </label>
+        </div>
+
         <div class="form-group photo-group">
           <label for="photo">Фотографія профілю</label>
           <div class="photo-upload">
@@ -171,8 +208,12 @@
               class="skill-item"
             >
               <div class="skill-info">
-                <span class="skill-category">{{ skill.get("category_name")?.value }}</span>
-                <span class="skill-subtype">{{ skill.get("subcategory_name")?.value }}</span>
+                <span class="skill-category">{{
+                  skill.get("category_name")?.value
+                }}</span>
+                <span class="skill-subtype">{{
+                  skill.get("subcategory_name")?.value
+                }}</span>
               </div>
 
               <div class="skill-price">

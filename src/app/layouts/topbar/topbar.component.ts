@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-topbar',
@@ -40,6 +41,12 @@ export class TopbarComponent {
     'Автономна Республіка Крим',
   ];
   selectedCity = this.cities[0];
+
+  constructor(private router: Router) {}
+
+  navigateToProfile(): void {
+    this.router.navigate(['/admin/profile']);
+  }
 
   toggleTheme(): void {
     this.isDarkMode = !this.isDarkMode;
