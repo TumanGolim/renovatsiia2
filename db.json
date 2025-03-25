@@ -345,6 +345,69 @@
       ],
       "avatar": "",
       "reviews": []
+    },
+    {
+      "id": "e524",
+      "firstName": "Андрей",
+      "lastName": "Крапивный",
+      "phone": "+380777754321",
+      "email": "krap@gmail.com",
+      "experience": 2,
+      "description": "                                                           ",
+      "location": "Київ",
+      "available": true,
+      "service_categories": [
+        {
+          "category_id": 1,
+          "category_name": "Стелі"
+        },
+        {
+          "category_id": 2,
+          "category_name": "Підлога"
+        },
+        {
+          "category_id": 3,
+          "category_name": "Стіни"
+        },
+        {
+          "category_id": 4,
+          "category_name": "Сантехніка"
+        }
+      ],
+      "services": [
+        {
+          "subcategory_id": 101,
+          "subcategory_name": "Фарбування стель",
+          "price_from": 600,
+          "price_to": 700
+        },
+        {
+          "subcategory_id": 203,
+          "subcategory_name": "Плитка",
+          "price_from": 800,
+          "price_to": 1000
+        },
+        {
+          "subcategory_id": 202,
+          "subcategory_name": "Паркет",
+          "price_from": 300,
+          "price_to": 400
+        },
+        {
+          "subcategory_id": 301,
+          "subcategory_name": "Шпалери",
+          "price_from": 400,
+          "price_to": 500
+        },
+        {
+          "subcategory_id": 403,
+          "subcategory_name": "Установка унітазу",
+          "price_from": 200,
+          "price_to": 300
+        }
+      ],
+      "avatar": "",
+      "reviews": []
     }
   ],
   "companies": [

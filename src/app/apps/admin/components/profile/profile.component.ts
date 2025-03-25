@@ -66,91 +66,14 @@ export class ProfileComponent implements OnInit {
   public workPhotos: WorkPhoto[] = [];
   public nextPhotoId = 1;
   public selectedCategory: string | null = null;
-
-  // Перелік категорій робіт
-  public categories: WorkCategory[] = [
-    {
-      category_id: 1,
-      category_name: 'Стелі',
-      subcategories: [
-        { subcategory_id: 101, subcategory_name: 'Фарбування стель' },
-        { subcategory_id: 102, subcategory_name: 'Натяжні' },
-        { subcategory_id: 103, subcategory_name: 'Гіпсокартонні стелі' },
-      ],
-    },
-    {
-      category_id: 2,
-      category_name: 'Підлога',
-      subcategories: [
-        { subcategory_id: 201, subcategory_name: 'Укладання ламінату' },
-        { subcategory_id: 202, subcategory_name: 'Паркет' },
-        { subcategory_id: 203, subcategory_name: 'Плитка' },
-      ],
-    },
-    {
-      category_id: 3,
-      category_name: 'Стіни',
-      subcategories: [
-        { subcategory_id: 301, subcategory_name: 'Шпалери' },
-        { subcategory_id: 302, subcategory_name: 'Фарбування стін' },
-        { subcategory_id: 303, subcategory_name: 'Декоративна штукатурка' },
-      ],
-    },
-    {
-      category_id: 4,
-      category_name: 'Сантехніка',
-      subcategories: [
-        { subcategory_id: 401, subcategory_name: 'Встановлення ванни' },
-        { subcategory_id: 402, subcategory_name: 'Ремонт труб' },
-        { subcategory_id: 403, subcategory_name: 'Установка унітазу' },
-      ],
-    },
-    {
-      category_id: 5,
-      category_name: 'Електрика',
-      subcategories: [
-        { subcategory_id: 501, subcategory_name: 'Проводка' },
-        { subcategory_id: 502, subcategory_name: 'Встановлення розеток' },
-        { subcategory_id: 503, subcategory_name: 'Монтаж освітлення' },
-        { subcategory_id: 504, subcategory_name: 'Електрощит' },
-      ],
-    },
-    {
-      category_id: 6,
-      category_name: 'Двері та вікна',
-      subcategories: [
-        { subcategory_id: 601, subcategory_name: 'Встановлення дверей' },
-        { subcategory_id: 602, subcategory_name: 'Встановлення вікон' },
-        { subcategory_id: 603, subcategory_name: 'Відкоси' },
-        { subcategory_id: 604, subcategory_name: 'Підвіконня' },
-      ],
-    },
-    {
-      category_id: 7,
-      category_name: 'Балкон та лоджія',
-      subcategories: [
-        { subcategory_id: 701, subcategory_name: 'Засклення' },
-        { subcategory_id: 702, subcategory_name: 'Утеплення' },
-        { subcategory_id: 703, subcategory_name: 'Оздоблення' },
-      ],
-    },
-    {
-      category_id: 8,
-      category_name: 'Додаткові роботи',
-      subcategories: [
-        { subcategory_id: 801, subcategory_name: 'Прибирання' },
-        { subcategory_id: 802, subcategory_name: 'Вивіз сміття' },
-        { subcategory_id: 803, subcategory_name: 'Демонтаж' },
-        { subcategory_id: 804, subcategory_name: "Дизайн інтер'єру" },
-      ],
-    },
-  ];
+  public categories: WorkCategory[] = [];
 
   constructor(private fb: FormBuilder) {}
 
   public ngOnInit(): void {
     this.initForm();
     this.loadSavedData();
+    this.loadCategories();
   }
 
   public initForm(): void {
@@ -332,5 +255,24 @@ export class ProfileComponent implements OnInit {
         });
       }
     });
+  }
+
+  private loadCategories(): void {
+    fetch('http://localhost:3000/serviceCategories')
+      .then((response) => response.json())
+      .then((data) => {
+        this.categories = data.map((category: any) => ({
+          category_id: category.category_id,
+          category_name: category.category_name,
+          subcategories: category.subcategories.map((sub: any) => ({
+            subcategory_id: sub.subcategory_id,
+            subcategory_name: sub.subcategory_name,
+          })),
+        }));
+      })
+      .catch((error) => {
+        console.error('Помилка при завантаженні категорій:', error);
+        alert('Помилка при завантаженні категорій');
+      });
   }
 }
