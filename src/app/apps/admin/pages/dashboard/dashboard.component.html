@@ -1,1 +1,56 @@
-<app-profile></app-profile>
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1>Адмін-панель</h1>
+    <p>Управління зареєстрованими майстрами</p>
+  </div>
+
+  <div class="masters-list" *ngIf="!isLoading && !error">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Ім'я</th>
+          <th>Прізвище</th>
+          <th>Телефон</th>
+          <th>Email</th>
+          <th>Місто</th>
+          <th>Досвід</th>
+          <th>Рейтинг</th>
+          <th>Статус</th>
+          <th>Дії</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let master of masters">
+          <td>{{ master.id }}</td>
+          <td>{{ master.firstName }}</td>
+          <td>{{ master.lastName }}</td>
+          <td>{{ master.phone }}</td>
+          <td>{{ master.email }}</td>
+          <td>{{ master.location || "Не вказано" }}</td>
+          <td>{{ master.experience }} років</td>
+          <td>{{ master.rating || "Немає" }}</td>
+          <td>
+            <span
+              [class.active]="master.available"
+              [class.inactive]="!master.available"
+            >
+              {{ master.available ? "Активний" : "Неактивний" }}
+            </span>
+          </td>
+          <td>
+            <button class="delete-btn" (click)="deleteMaster(master.id)">
+              Видалити
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="loading" *ngIf="isLoading">Завантаження...</div>
+
+  <div class="error" *ngIf="error">
+    {{ error }}
+  </div>
+</div>
