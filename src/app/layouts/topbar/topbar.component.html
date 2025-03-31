@@ -22,6 +22,7 @@
 <button
   class="register-btn"
   [ngClass]="{ 'dark-btn': isDarkMode, 'light-btn': !isDarkMode }"
+  (click)="navigateToProfile()"
 >
   <span class="material-symbols-filled icon-person"> person </span>
   Увійти
