@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProfileComponent } from '../../components/profile/profile.component';
 
 interface Master {
   id: string;
@@ -17,7 +16,7 @@ interface Master {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, ProfileComponent],
+  imports: [CommonModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
